@@ -1,0 +1,964 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>A Universe Made Just For Her — Varshu • September 15, 2026</title>
+<!-- Google Fonts: Editorial Serif + Modern Luxe Sans + Romantic Script -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&amp;family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&amp;family=Italianno&amp;family=Montserrat:wght@200;300;400;500;600&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnight: '#050508',
+            obsidian: '#0a0a0f',
+            burgundy: '#2b0c16',
+            wine: '#18070d',
+            gold: {
+              300: '#f5e4b2',
+              400: '#e8c97e',
+              500: '#cfa853',
+              600: '#ab8438',
+              DEFAULT: '#dfbe76'
+            }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            cinzel: ['"Cinzel"', 'serif'],
+            sans: ['"Montserrat"', 'sans-serif'],
+            script: ['"Italianno"', 'cursive']
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles: Aesthetics, Glows, Glassmorphism, Animations -->
+<style data-purpose="base-styling">
+    body {
+      background-color: #050508;
+      color: #f3efe6;
+      overflow-x: hidden;
+      selection-background-color: #cfa853;
+      selection-color: #050508;
+    }
+    ::selection {
+      background: #cfa853;
+      color: #050508;
+    }
+    /* Smooth custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050508;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #342617;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #cfa853;
+    }
+  </style>
+<style data-purpose="custom-animations">
+    @keyframes pulseGlow {
+      0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 15px rgba(223, 190, 118, 0.45));
+      }
+      50% {
+        transform: scale(1.08);
+        filter: drop-shadow(0 0 35px rgba(223, 190, 118, 0.85));
+      }
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(0.5deg); }
+    }
+    @keyframes shimmerText {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    /* Filmic Hero Camera Drift / Breath */
+    @keyframes cinematicDrift {
+      0% {
+        transform: scale(1.0) translate3d(0, 0, 0);
+      }
+      50% {
+        transform: scale(1.045) translate3d(-6px, -4px, 0);
+      }
+      100% {
+        transform: scale(1.0) translate3d(0, 0, 0);
+      }
+    }
+    /* Ken Burns ambient motion for photography */
+    @keyframes kenBurnsSlow {
+      0% {
+        transform: scale(1.0) translate(0%, 0%);
+      }
+      50% {
+        transform: scale(1.06) translate(-1.2%, -0.8%);
+      }
+      100% {
+        transform: scale(1.0) translate(0%, 0%);
+      }
+    }
+    /* Floating Gold Embers / Stardust */
+    @keyframes floatEmber {
+      0% {
+        transform: translateY(100vh) translateX(0) scale(0.6);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.8;
+      }
+      80% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-10vh) translateX(25px) scale(1.2);
+        opacity: 0;
+      }
+    }
+    .animate-pulse-glow {
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+    .animate-float-slow {
+      animation: floatSlow 7s ease-in-out infinite;
+    }
+    .animate-cinematic-drift {
+      animation: cinematicDrift 20s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    .animate-ken-burns {
+      animation: kenBurnsSlow 18s ease-in-out infinite alternate;
+    }
+    .text-gold-shimmer {
+      background: linear-gradient(90deg, #dfbe76 0%, #fff7d6 50%, #ab8438 100%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      animation: shimmerText 6s linear infinite;
+    }
+    .glass-panel {
+      background: rgba(18, 14, 22, 0.62);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(223, 190, 118, 0.18);
+    }
+    .film-grain {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    /* 35mm Vintage Film Grain Noise Overlay */
+    .cinema-noise-overlay {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+    }
+    /* Ember particle container */
+    .ember-particle {
+      position: absolute;
+      border-radius: 9999px;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(245, 228, 178, 0.9) 0%, rgba(207, 168, 83, 0.3) 60%, transparent 100%);
+      box-shadow: 0 0 8px rgba(223, 190, 118, 0.8);
+      animation: floatEmber linear infinite;
+    }
+  </style>
+</head>
+<body class="relative font-sans antialiased text-stone-200" data-mode="connect">
+<!-- BEGIN: WebGL Procedural Shader Background Canvas -->
+<canvas class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-70" id="shaderCanvas" width="1280" height="12600"></canvas>
+<!-- END: WebGL Procedural Shader Background Canvas -->
+<!-- BEGIN: Cinematic 35mm Film Grain Noise Layer -->
+<div class="fixed inset-0 pointer-events-none z-10 cinema-noise-overlay mix-blend-screen opacity-60"></div>
+<!-- END: Cinematic 35mm Film Grain Noise Layer -->
+<!-- BEGIN: Starfield Canvas Background -->
+<!-- Ambient shimmering cosmic starfield for extreme luxury atmosphere -->
+<canvas class="fixed inset-0 pointer-events-none z-0 opacity-60" data-purpose="cosmic-canvas" height="12600" id="starfield" width="1280"></canvas>
+<!-- END: Starfield Canvas Background -->
+<!-- BEGIN: Floating Embers / Stardust Particles Container -->
+<div class="fixed inset-0 pointer-events-none z-10 overflow-hidden" id="embersContainer">
+<div class="ember-particle w-1.5 h-1.5" style="left: 12%; animation-duration: 14s; animation-delay: 0s;"></div>
+<div class="ember-particle w-1 h-1" style="left: 28%; animation-duration: 18s; animation-delay: 3s;"></div>
+<div class="ember-particle w-2 h-2" style="left: 45%; animation-duration: 16s; animation-delay: 1s;"></div>
+<div class="ember-particle w-1 h-1" style="left: 62%; animation-duration: 21s; animation-delay: 5s;"></div>
+<div class="ember-particle w-1.5 h-1.5" style="left: 78%; animation-duration: 15s; animation-delay: 2s;"></div>
+<div class="ember-particle w-1 h-1" style="left: 89%; animation-duration: 19s; animation-delay: 4s;"></div>
+</div>
+<!-- END: Floating Embers / Stardust Particles Container -->
+<!-- BEGIN: Ambient Audio Status & Top Bar -->
+<header class="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300 backdrop-blur-sm bg-stone-950/20" data-purpose="experience-header" id="topNav">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-gold animate-ping"></span>
+<span class="text-xs uppercase tracking-[0.3em] text-gold-300 font-cinzel">VARSHU • MMXVI • MMXXVI</span>
+<!-- Live Cinematic Indicator Badge -->
+<div class="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gold/30 bg-gold/10 text-[10px] tracking-[0.25em] font-cinzel text-gold-300 animate-pulse">
+<span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>
+<span class="">LIVE CINEMATIC EXPERIENCE</span>
+</div>
+</div>
+<!-- Audio Player Pill Interactive -->
+<div class="glass-panel px-4 py-1.5 rounded-full flex items-center gap-3 cursor-pointer shadow-lg shadow-black/40 hover:border-gold/50 transition duration-300" data-purpose="audio-toggle" id="audioToggle">
+<div class="flex items-center gap-1 h-3" id="audioWaves">
+<span class="w-0.5 h-2 bg-gold-400 animate-pulse"></span>
+<span class="w-0.5 h-3.5 bg-gold-300 animate-pulse delay-75"></span>
+<span class="w-0.5 h-1.5 bg-gold-500 animate-pulse delay-150"></span>
+<span class="w-0.5 h-3 bg-gold-400 animate-pulse delay-100"></span>
+</div>
+<span class="text-[11px] font-sans tracking-widest uppercase text-stone-300" id="audioLabel">Celestial Soundtrack • Playing</span>
+</div>
+</header>
+<!-- END: Ambient Audio Status & Top Bar -->
+<!-- BEGIN: Screen 01 — Cinematic Opening -->
+<section class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 py-20 z-20 overflow-hidden" data-purpose="cinematic-opening" id="screen-01">
+<div class="max-w-4xl mx-auto flex flex-col items-center animate-cinematic-drift transform-gpu will-change-transform">
+<p class="text-xs md:text-sm font-sans tracking-[0.4em] uppercase text-stone-400 mb-6 opacity-90">
+        There are billions of people in this world…
+      </p>
+<p class="font-serif italic text-lg md:text-2xl text-stone-300 font-light mb-8">
+        …but somehow through all of time and space…
+      </p>
+<!-- Monumental Headline -->
+<h1 class="text-5xl sm:text-7xl md:text-9xl font-cinzel font-black tracking-wider text-gold-shimmer mb-6 drop-shadow-2xl">
+        I FOUND YOU.
+      </h1>
+<div class="w-16 h-[1px] bg-gradient-to-r from-transparent via-gold to-transparent mb-8"></div>
+<p class="font-cinzel text-sm sm:text-base tracking-[0.45em] text-gold-300 uppercase mb-12">
+        15 • SEPTEMBER • 2026
+      </p>
+<a class="group relative inline-flex items-center gap-4 px-9 py-4 rounded-full bg-gradient-to-r from-stone-900/90 via-burgundy/60 to-stone-900/90 border border-gold/40 text-gold-300 font-cinzel text-xs sm:text-sm tracking-[0.3em] uppercase transition-all duration-500 hover:border-gold hover:shadow-[0_0_30px_rgba(223,190,118,0.4)] hover:scale-105 active:scale-95" data-purpose="enter-story-btn" href="#screen-02">
+<span class="">Enter Your Story</span>
+<svg class="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</a>
+</div>
+<!-- Gentle Scroll Indicator -->
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition duration-300">
+<span class="text-[10px] font-sans uppercase tracking-[0.25em] text-stone-400">Scroll Down</span>
+<div class="w-4 h-7 border border-stone-500 rounded-full flex justify-center p-1">
+<div class="w-1 h-1.5 bg-gold rounded-full animate-bounce"></div>
+</div>
+</div>
+</section>
+<!-- END: Screen 01 — Cinematic Opening -->
+<!-- BEGIN: Screen 02 — Enter Her Universe -->
+<section class="relative min-h-screen flex items-center justify-center px-6 py-28 z-20" data-purpose="enter-universe" id="screen-02">
+<div class="max-w-4xl mx-auto text-center">
+<span class="inline-block px-4 py-1 rounded-full text-[10px] tracking-[0.35em] uppercase font-cinzel text-gold-400 border border-gold/25 mb-6 glass-panel">
+        Genesis • Chapter Zero
+      </span>
+<h2 class="text-3xl sm:text-5xl md:text-6xl font-serif font-light text-stone-100 mb-8 leading-tight">
+        Welcome to Your <span class="italic text-gold font-normal">Little Universe</span>
+</h2>
+<p class="max-w-2xl mx-auto text-sm sm:text-lg text-stone-400 font-sans font-light leading-relaxed mb-12">
+        Everything you see here was made with you in mind. Every word, every celestial particle, every golden hour memory preserved for timeless eternity.
+      </p>
+<!-- Atmospheric Feature Highlight Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mt-10">
+<div class="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:border-gold/40 transition duration-500">
+<div class="text-gold-500 font-cinzel text-xs tracking-widest mb-3">01 / RADIANCE</div>
+<h3 class="font-serif text-xl text-stone-200 mb-2">Unmatched Grace</h3>
+<p class="text-xs text-stone-400 leading-relaxed">The celestial balance between playful smiles, soulful depth, and quiet gentleness.</p>
+</div>
+<div class="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:border-gold/40 transition duration-500">
+<div class="text-gold-500 font-cinzel text-xs tracking-widest mb-3">02 / DESTINY</div>
+<h3 class="font-serif text-xl text-stone-200 mb-2">Sunset &amp; Shorelines</h3>
+<p class="text-xs text-stone-400 leading-relaxed">Where the sea meets the amber horizon, wrapped in sunlit waves and unspoken peace.</p>
+</div>
+<div class="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:border-gold/40 transition duration-500">
+<div class="text-gold-500 font-cinzel text-xs tracking-widest mb-3">03 / DEVOTION</div>
+<h3 class="font-serif text-xl text-stone-200 mb-2">Infinite Tomorrow</h3>
+<p class="text-xs text-stone-400 leading-relaxed">A promise written not just for today, but for every chapter and adventure that follows.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Screen 02 — Enter Her Universe -->
+<!-- BEGIN: Screen 03 — Her Name Reveal -->
+<section class="relative min-h-screen flex flex-col items-center justify-center px-4 py-28 text-center z-20" data-purpose="her-name-reveal" id="screen-03">
+<div class="relative max-w-5xl mx-auto flex flex-col items-center">
+<!-- Glow Aura Behind Her Name -->
+<div class="absolute -inset-10 bg-gold/15 rounded-full blur-3xl pointer-events-none"></div>
+<span class="text-xs sm:text-sm font-sans tracking-[0.35em] text-stone-400 uppercase mb-4">
+        This entire universe has only one name…
+      </span>
+<!-- Staggered Big Title -->
+<div class="relative py-8">
+<h2 class="text-6xl sm:text-8xl md:text-9xl tracking-[0.25em] font-cinzel font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-stone-100 via-gold-300 to-amber-700 drop-shadow-[0_15px_35px_rgba(207,168,83,0.3)]">
+          VARSHU</h2>
+<div class="text-script text-4xl sm:text-6xl md:text-7xl text-gold-400/80 -mt-6 sm:-mt-10 tracking-widest pointer-events-none">
+          my morning star, my celestial light
+        </div>
+</div>
+<p class="max-w-xl text-sm sm:text-base text-stone-300 font-serif italic mt-6 leading-relaxed">
+        “You do not simply exist in this world; you illuminate every dark corner of it.”
+      </p>
+</div>
+</section>
+<!-- END: Screen 03 — Her Name Reveal -->
+<!-- BEGIN: Screen 04 — Our Story (Cinematic Chapters) -->
+<section class="relative min-h-screen px-6 py-28 z-20 max-w-6xl mx-auto" data-purpose="our-story-chapters" id="screen-04">
+<div class="text-center mb-24">
+<span class="text-xs font-cinzel tracking-[0.3em] uppercase text-gold-400">Chronicles of Us</span>
+<h2 class="text-3xl sm:text-5xl font-serif text-stone-100 mt-2">The Cinematic Chapters</h2>
+<div class="w-12 h-[1px] bg-gold mx-auto mt-4"></div>
+</div>
+<div class="space-y-36">
+<!-- CHAPTER 01: Golden Hour Sunset Silhouette -->
+<article class="flex flex-col md:flex-row items-center gap-12 lg:gap-16" data-purpose="chapter-one">
+<div class="w-full md:w-1/2 order-2 md:order-1">
+<div class="flex items-center gap-3 mb-4">
+<span class="text-xs font-cinzel tracking-[0.3em] text-gold-400 uppercase">Chapter 01 • Golden Hour Horizon</span>
+<div class="h-[1px] flex-1 bg-stone-800"></div>
+</div>
+<h3 class="text-2xl sm:text-4xl font-serif text-stone-100 mb-4">The Beginning Under Starlight &amp; Sun</h3>
+<p class="text-sm sm:text-base text-stone-400 leading-relaxed font-sans font-light mb-6">
+            Looking out into the incandescent golden sky as the sun dipped toward the horizon. That peaceful silhouette, framed in shimmering water and gentle sea breeze, remains etched forever in my soul.
+          </p>
+<div class="text-xs font-cinzel text-stone-500 tracking-widest">
+            LOCATION • GOLDEN WATERS • SUNSET SOLITUDE
+          </div>
+</div>
+<div class="w-full md:w-1/2 order-1 md:order-2">
+<div class="relative group overflow-hidden rounded-2xl border border-gold/20 shadow-2xl shadow-burgundy/30 transition duration-700 hover:border-gold/50">
+<img alt="Varshu standing in breathtaking golden hour sunset silhouette by the shimmering water" class="w-full h-[460px] sm:h-[620px] object-cover object-center animate-ken-burns transition duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2Bnh9qQ_2WoMFFeZMGTsHUCLFXZ05GbrsooYN8k_1tKdv9ZD87gx62uYqhUltvvCQDoTg4I2N_wfs-OQRdqNv9gUghX_0VyEtzWddvhihBiqeBF9MUNpRpBa2QO13wWF1jlXgBegzboilw2Lld3A_V_8yaKuECsnutSf4KdqUlClYBcY0Es5G3XnBXL_pbJSQeU5l3wDAM9CRmV_ADRy4hPvWlfU737tFMCkoS1F3JA2Q76PUsxUSzHjmbH9dlnWH43c" style="object-position: 70% 30%;">
+<div class="absolute inset-0 bg-gradient-to-t from-midnight/80 via-transparent to-transparent opacity-60 pointer-events-none"></div>
+</div>
+</div>
+</article>
+<!-- CHAPTER 02: Sunset Shoreline Stroll -->
+<article class="flex flex-col md:flex-row items-center gap-12 lg:gap-16" data-purpose="chapter-two">
+<div class="w-full md:w-1/2">
+<div class="relative group overflow-hidden rounded-2xl border border-gold/20 shadow-2xl shadow-burgundy/30 transition duration-700 hover:border-gold/50">
+<img alt="Panoramic beach view of Varshu walking beside pastel pink ocean sunset waves" class="w-full h-[460px] sm:h-[620px] object-cover object-center animate-ken-burns transition duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbvlXCH-4jbwCnTpbNikBlnTfY4u0OlwqM4xfiAyYSychLVu2Igk9K7NGx9_WPWHD4dzQpZlh2h7u4jL-aQSGhTz2qhZZDlibomlOqCH-LEeXJqO_7Wm5PgYrWcv4s42u_h2v-wQij0ozbBwVed7VgF_3TsheL8N2C9n4mDh58Ass7jZ7P06A9GW1pyNA5LdemThRljC3KSgcQQCPicp8yoJ0QlbsAC2q6OpHB2f6HwuyjVMimjdr3IDQdjqe3jqbI4tE" style="object-position: 48% 30%;">
+<div class="absolute inset-0 bg-gradient-to-t from-midnight/80 via-transparent to-transparent opacity-60 pointer-events-none"></div>
+</div>
+</div>
+<div class="w-full md:w-1/2">
+<div class="flex items-center gap-3 mb-4">
+<span class="text-xs font-cinzel tracking-[0.3em] text-gold-400 uppercase">Chapter 02 • And Then…</span>
+<div class="h-[1px] flex-1 bg-stone-800"></div>
+</div>
+<h3 class="text-2xl sm:text-4xl font-serif text-stone-100 mb-4">The Quiet Alchemy of Shorelines</h3>
+<p class="text-sm sm:text-base text-stone-400 leading-relaxed font-sans font-light mb-6">
+            Walking beside the crashing waves under pastel skies of cotton candy pink and violet. No hurry, no noise from the outside world — just the calm sound of the tide and you walking by my side.
+          </p>
+<div class="text-xs font-cinzel text-stone-500 tracking-widest">
+            COASTAL HORIZON • TENDER WAVES • BOUND BY SERENITY
+          </div>
+</div>
+</article>
+<!-- CHAPTER 03: Sunlit Dunes & Warm Laughs -->
+<article class="flex flex-col md:flex-row items-center gap-12 lg:gap-16" data-purpose="chapter-three">
+<div class="w-full md:w-1/2 order-2 md:order-1">
+<div class="flex items-center gap-3 mb-4">
+<span class="text-xs font-cinzel tracking-[0.3em] text-gold-400 uppercase">Chapter 03 • Warm Days</span>
+<div class="h-[1px] flex-1 bg-stone-800"></div>
+</div>
+<h3 class="text-2xl sm:text-4xl font-serif text-stone-100 mb-4">Somehow, You Became My Favorite Part</h3>
+<p class="text-sm sm:text-base text-stone-400 leading-relaxed font-sans font-light mb-6">
+            Standing on the warm sand in the soft afternoon warmth, eyes sparkling with that quiet, radiant confidence. That was the moment I realized every place on earth turns into poetry whenever you are there.
+          </p>
+<div class="text-xs font-cinzel text-stone-500 tracking-widest">
+            BEACH DAYS • SUNSHINE SMILE • UNFORGETTABLE YOU
+          </div>
+</div>
+<div class="w-full md:w-1/2 order-1 md:order-2">
+<div class="relative group overflow-hidden rounded-2xl border border-gold/20 shadow-2xl shadow-burgundy/30 transition duration-700 hover:border-gold/50">
+<img alt="Varshu looking radiant on the sunlit beach in wide leg denim and graphic floral tee" class="w-full h-[460px] sm:h-[620px] object-cover object-top animate-ken-burns transition duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4tM7mfCNW_V0bpxiK4tZrho-3vLPT6OmiIm4nqJCFNKq4E2ggMlum9XJJCzSrTwIpIAwC_5c-ii3i5NLVEfr7CN-XV6I33w1lls6iFonLMPrwK3bbFqyr9BfaOof8t2aZ2GM7uMjqwbNvb-cSHZ6fxW2jxcY-QttdcHiy0UfhMeBbnsFUF8-5pQ74DUkLZykSYP1jxayZLXoSp4IpFDcZOq2mO1tnE2S11ub2R2Q6z7_YvNg8vtk34FCM8qLlU-yNis8" style="object-position: 50% 15%;">
+<div class="absolute inset-0 bg-gradient-to-t from-midnight/80 via-transparent to-transparent opacity-60 pointer-events-none"></div>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- END: Screen 04 — Our Story (Cinematic Chapters) -->
+<!-- BEGIN: Screen 05 — Immersive Editorial Collage -->
+<section class="relative min-h-screen px-6 py-28 z-20 max-w-7xl mx-auto" data-purpose="editorial-collage" id="screen-05">
+<div class="text-center mb-16">
+<span class="text-xs font-cinzel tracking-[0.3em] uppercase text-gold-400">Vogue / Hasselblad Aesthetic</span>
+<h2 class="text-3xl sm:text-5xl font-serif text-stone-100 mt-2">Memories That Deserve Forever</h2>
+<p class="font-serif italic text-stone-400 mt-3 text-sm sm:text-base">“I wish I could pause this moment and live inside it endlessly.”</p>
+</div>
+<!-- Editorial Gallery Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+<!-- Main High-Fashion Portrait Cover (Arcade Neon Glow) -->
+<div class="md:col-span-6 relative">
+<div class="relative glass-panel p-3 rounded-2xl border border-gold/40 shadow-[0_20px_50px_rgba(0,0,0,0.8)] transform -rotate-1 hover:rotate-0 transition duration-500 overflow-hidden">
+<div class="relative overflow-hidden rounded-xl">
+<!-- Top Magazine Masthead Overlay -->
+<div class="absolute top-4 inset-x-0 z-20 text-center pointer-events-none">
+<h4 class="font-serif text-5xl sm:text-7xl font-bold tracking-[0.18em] text-stone-100/90 drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">VARSHU</h4>
+<p class="text-[10px] font-cinzel tracking-[0.4em] text-gold-300 uppercase mt-0.5">THE CELESTIAL EDITION • SPECIAL ISSUE</p>
+</div>
+<img alt="Varshu high fashion editorial portrait with vibrant cinematic arcade lights and glowing color reflections" class="w-full h-[540px] sm:h-[620px] object-cover object-top animate-ken-burns" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1yg5wabNq9ESAb3FcpxrtAybOtae4EOv8BHh15321b4oMv3usavrmdI8rg7e1niEtkCnsRXE2A7K-h66LZi07CFxAqbrYv3ByCGVqd4EqJQrKQZQcaUAT2vUmRBgssqk_H8jbKDS0erpIC8S2DAVsjSVUQw7faAKXnmZf77fsQgsJ7kSSDakyI_RbHFYp_D1H2GjgNukp-7O83yPNxLxA9B5u3NLSjTQRmwArKPcKwN_Uy8gQmFdNCndsQGjeGOyNIJw" style="object-position: 50% 20%;">
+<div class="absolute bottom-0 inset-x-0 h-36 bg-gradient-to-t from-midnight via-midnight/50 to-transparent pointer-events-none"></div>
+<div class="absolute bottom-4 left-4 right-4 z-20 flex justify-between items-end text-xs font-cinzel text-stone-200 drop-shadow">
+<div>
+<span class="text-gold block text-[10px] tracking-widest">AUTUMN / WINTER 2026</span>
+<span class="text-sm font-semibold tracking-wider">MIDNIGHT LUMINESCENCE</span>
+</div>
+<span class="text-stone-400 tracking-widest">N° 09/15</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Overlapping Polaroid & Candids -->
+<div class="md:col-span-6 flex flex-col gap-6">
+<div class="grid grid-cols-2 gap-4">
+<!-- Polaroid 1: Candid Cafe / Boba Moment -->
+<div class="glass-panel p-2.5 rounded-xl border border-gold/20 transform rotate-2 hover:rotate-0 hover:scale-105 transition duration-500 shadow-xl overflow-hidden">
+<div class="overflow-hidden rounded-lg h-52 sm:h-60">
+<img alt="Candid cafe moment with Varshu holding a warm beverage and smiling softly" class="w-full h-full object-cover object-top transform hover:scale-110 transition duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtXbwHWYXb9qASpH4InpjcaSxcqvO-SG96axTWDVQNSfrq6_jkZdV20EXRCbj5iLV4MkxXiCEhDAW7ZcH5omZf8ddlEvfLSAJOKIkH6_0Plm58IvePV9oa1A95-vA5i8RWeXaklFp6NRLgIpU-vyQuD-aBZT39qj1xhpj6-D645XZ-k9y0p4MwB441qcniwR3JJmFb9Q752sK13_I2tPPTS3iXUKZ62-Fnr0g9TJWzFKlOcMqeK9RXvvc8WD1DhPdfkrlew3J65pIjNtA" style="object-position: 50% 22%;">
+</div>
+<p class="font-sans text-[11px] text-center text-stone-300 mt-2.5">Sweet Cafe Afternoons • Candid Laughs</p>
+</div>
+<!-- Polaroid 2: Breezy Beach Golden Hour Profile -->
+<div class="glass-panel p-2.5 rounded-xl border border-gold/20 transform -rotate-2 hover:rotate-0 hover:scale-105 transition duration-500 shadow-xl overflow-hidden">
+<div class="overflow-hidden rounded-lg h-52 sm:h-60">
+<img alt="Varshu at the shoreline bathed in golden dusk, hands in hair enjoying the sea breeze" class="w-full h-full object-cover object-top transform hover:scale-110 transition duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ-ICH8YUCq6ce-Vo68bezmk_eyqnJgDE8KQ0HX3X8_G8kO0FqUwL42jcHwENERTPyifgbq7p8gmOya2-8MM7Oi9dbCTRqQW3B_Ox7G9OmPnXG_k1gcEm89IVtqPnaNbi0XtoiadQFtQhE52Dz9NgVc0Dhyl8BNWo2D1_AaMwOIrlTc_ZypfstgY0OJr18wSmXHJ9nlEtMU5uHaZel2xf1KQdoTsdpmhZWCLfytyTa-i2OeqLXpnCuwuKDPkWhvp0FWB66RkEkrJH58nw" style="object-position: 50% 18%;">
+</div>
+<p class="font-sans text-[11px] text-center text-stone-300 mt-2.5">Golden Hour Breeze • Pure Joy</p>
+</div>
+</div>
+<!-- Quote Block Card -->
+<div class="glass-panel p-8 rounded-2xl border-l-4 border-gold text-left relative overflow-hidden">
+<span class="text-5xl font-serif text-gold-400/30 absolute -top-1 right-4 select-none">“</span>
+<p class="font-serif italic text-lg sm:text-xl text-stone-200 leading-relaxed mb-4">
+            You made ordinary days feel like private cinema. Even the quietest sunset feels like magic when I am standing next to you.
+          </p>
+<div class="text-xs font-cinzel uppercase tracking-widest text-gold-400">— Akash</div>
+</div>
+<!-- Shoreline Sunset Landscape Feature -->
+<div class="glass-panel p-3 rounded-2xl border border-gold/20 hover:border-gold/40 transition duration-500 overflow-hidden">
+<div class="overflow-hidden rounded-xl h-72 sm:h-[380px] w-full bg-stone-900/50">
+<img alt="Shoreline Solitude - Our Golden Horizon" class="w-full h-full object-cover object-center transform hover:scale-105 transition duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr991XHdAxKzcBJ387mJWdMx0keXe6G1nq2xLujEuHz2p8hvex2MvnCbw_2N0IANbXTVFZlbUMNRXxLjW7cL0SkzeLLDuDY8iEVkJgSonaBmme7leklcH0brQ-wO-Zeu5OuOA151AR8jZ8NtLn5u8T6QVDe16nrER4E_yKuBqdeVUg54Wrab8F_914myU087amWeM3dx89gLi8wgSMBuvIgRHiOch2Ao4lv-2hKdE-647PrZUkF-TS453cy00YogrOOa7KlPiLF391MHE">
+</div>
+<div class="p-2 text-[11px] text-stone-400 font-sans flex justify-between">
+<span class="">Shoreline Solitude</span>
+<span class="text-gold">Our Golden Horizon</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Screen 05 — Immersive Editorial Collage -->
+<!-- BEGIN: Screen 06 — Interactive 3D Memory Cards -->
+<section class="relative min-h-screen flex flex-col items-center justify-center px-6 py-28 z-20" data-purpose="interactive-memory-cards" id="screen-06">
+<div class="text-center mb-10">
+<span class="text-xs font-cinzel tracking-[0.3em] uppercase text-gold-400">Interactive Vault</span>
+<h2 class="text-3xl sm:text-5xl font-serif text-stone-100 mt-2">Tender Memorabilia</h2>
+<p class="text-xs text-stone-400 uppercase tracking-widest mt-2">Click card to cycle memories &amp; photographs</p>
+</div>
+<!-- Stacked 3D Card Area with Photograph Preview -->
+<div class="relative w-full max-w-lg min-h-[500px] flex items-center justify-center cursor-pointer select-none" data-purpose="cards-deck" id="cardStackContainer">
+<div class="glass-panel w-full p-6 sm:p-8 rounded-3xl border border-gold/30 shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex flex-col justify-between transition-all duration-500 transform hover:-translate-y-2" id="memoryCard">
+<div class="flex justify-between items-center text-xs font-cinzel text-gold-400 mb-4">
+<span id="cardCounter" class="">MEMORY 01 / 06</span>
+<span id="cardDate" class="">GOLDEN HOUR</span>
+</div>
+<!-- Photo Thumb in Card -->
+<div class="w-full h-72 sm:h-[380px] rounded-xl overflow-hidden mb-4 border border-gold/20 bg-stone-900/50">
+<img alt="Memory Photo" class="w-full h-full object-cover object-top transition duration-500" id="cardImage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUeoNuDAtBAy0KLxxudhC3K_tMK7CKE3Ba0PqKnUWH4ez7G2b3X75pkR_cXwest4wcQTw0VbCYlZsyRP6LtMOMYBaMQK7Nj1H1MUnw5KsWvkvqJHQnhX-tTjfMQ3fQq2kgkk5aCxhCvUeCHg-o27Zba5oA9CqKgn6PL8z1rP945GVns5ehBrRJgZFwxsHn55VP2w_d-qjTgeMmhstKy2BxXr6kHeH9eEkAyfifmzXp6935SIDDBVF4l5HoWVMLOnS_GG4" style="object-position: 50% 20%;">
+</div>
+<div class="py-2 text-center">
+<div class="text-2xl mb-2" id="cardEmoji">✨</div>
+<h4 class="font-serif text-2xl text-stone-100 mb-2" id="cardTitle">The Sunset Silhouette</h4>
+<p class="text-sm text-stone-300 font-sans font-light leading-relaxed" id="cardSnippet">
+            Looking out into the glowing water at dusk, feeling the quiet certainty that you would become my favorite story.
+          </p>
+</div>
+<div class="text-center border-t border-stone-800/80 pt-4 mt-4 text-[10px] uppercase font-sans tracking-[0.25em] text-stone-400 flex items-center justify-center gap-2">
+<span class="">Tap anywhere to cycle</span> • <span class="text-gold">Next Memory →</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Screen 06 — Interactive 3D Memory Cards -->
+<!-- BEGIN: Screen 07 — Reasons I Love You -->
+<section class="relative min-h-screen flex flex-col items-center justify-center px-6 py-28 z-20 bg-gradient-to-b from-transparent via-wine/40 to-transparent" data-purpose="reasons-heart-section" id="screen-07">
+<div class="text-center mb-10">
+<span class="text-xs font-cinzel tracking-[0.3em] uppercase text-gold-400">Sacred Devotion</span>
+<h2 class="text-3xl sm:text-5xl font-serif text-stone-100 mt-2">Reasons Why It’s You</h2>
+<p class="text-xs text-stone-400 uppercase tracking-widest mt-2">Tap the celestial heart below</p>
+</div>
+<!-- Pulsating Heart Button -->
+<div class="my-8 flex flex-col items-center">
+<button aria-label="Tap to see another reason why I love you" class="group relative p-6 rounded-full glass-panel border border-gold/40 transition duration-300 hover:border-gold focus:outline-none" data-purpose="celestial-heart-trigger" id="heartBtn">
+<svg class="w-16 h-16 sm:w-20 sm:h-20 text-gold fill-gold/20 animate-pulse-glow group-hover:fill-gold transition-colors duration-500" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+<path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<span class="text-[11px] font-cinzel uppercase tracking-[0.2em] text-gold-300 mt-4">Touch the Star Heart</span>
+</div>
+<!-- Animated Display for Reasons -->
+<div class="max-w-xl w-full min-h-[140px] glass-panel rounded-2xl p-8 text-center border border-gold/25 flex flex-col items-center justify-center transition-all duration-500" data-purpose="reasons-output" id="reasonContainer">
+<span class="text-xs font-cinzel text-gold-400 tracking-widest uppercase mb-2" id="reasonIndex">REASON 01</span>
+<p class="font-serif text-xl sm:text-2xl text-stone-100 italic transition-opacity duration-300" id="reasonText">
+        “Your smile outshines every star in this sky, and turns even my hardest days into warmth.”
+      </p>
+</div>
+</section>
+<!-- END: Screen 07 — Reasons I Love You -->
+<!-- BEGIN: Screen 08 — The Countdown -->
+<section class="relative min-h-screen flex flex-col items-center justify-center px-6 py-28 text-center z-20" data-purpose="countdown-to-birthday" id="screen-08">
+<div class="max-w-4xl mx-auto">
+<span class="text-xs font-cinzel tracking-[0.35em] uppercase text-gold-400">Marking The Cosmos</span>
+<h2 class="text-3xl sm:text-6xl font-serif text-stone-100 mt-3 mb-4">The Grand Celebration Awaits</h2>
+<p class="font-sans text-stone-400 text-sm tracking-wide max-w-lg mx-auto mb-14">
+        Every second brings us closer to September 15, 2026 — a milestone day dedicated solely to honoring Varshu's presence in this universe.
+      </p>
+<!-- Countdown Digital Ticker -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-2xl mx-auto mb-12">
+<div class="glass-panel p-6 rounded-2xl border border-gold/30">
+<div class="text-4xl sm:text-6xl font-cinzel font-bold text-gold-shimmer" id="days">04</div>
+<div class="text-[10px] font-sans tracking-[0.3em] uppercase text-stone-400 mt-2">Days</div>
+</div>
+<div class="glass-panel p-6 rounded-2xl border border-gold/30">
+<div class="text-4xl sm:text-6xl font-cinzel font-bold text-gold-shimmer" id="hours">01</div>
+<div class="text-[10px] font-sans tracking-[0.3em] uppercase text-stone-400 mt-2">Hours</div>
+</div>
+<div class="glass-panel p-6 rounded-2xl border border-gold/30">
+<div class="text-4xl sm:text-6xl font-cinzel font-bold text-gold-shimmer" id="minutes">11</div>
+<div class="text-[10px] font-sans tracking-[0.3em] uppercase text-stone-400 mt-2">Minutes</div>
+</div>
+<div class="glass-panel p-6 rounded-2xl border border-gold/30">
+<div class="text-4xl sm:text-6xl font-cinzel font-bold text-gold-shimmer" id="seconds">33</div>
+<div class="text-[10px] font-sans tracking-[0.3em] uppercase text-stone-400 mt-2">Seconds</div>
+</div>
+</div>
+<div class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-gold/20 text-xs font-sans tracking-widest text-stone-300">
+<span class="w-1.5 h-1.5 rounded-full bg-gold animate-pulse"></span>
+        Something extraordinary is waiting for you…
+      </div>
+</div>
+</section>
+<!-- END: Screen 08 — The Countdown -->
+<!-- BEGIN: Screen 09 — Grand Birthday Reveal -->
+<section class="relative min-h-screen flex flex-col items-center justify-center px-6 py-28 text-center z-20 overflow-hidden" data-purpose="birthday-reveal-spectacle" id="screen-09">
+<!-- Starburst Background Effect -->
+<div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-500/10 via-burgundy/20 to-transparent pointer-events-none"></div>
+<div class="relative max-w-4xl mx-auto flex flex-col items-center">
+<span class="text-xs font-cinzel tracking-[0.4em] uppercase text-gold-300 mb-4">15 September • The Day of Days</span>
+<h2 class="text-5xl sm:text-7xl md:text-8xl font-cinzel font-black tracking-wider text-stone-100 drop-shadow-2xl mb-2">
+        HAPPY BIRTHDAY
+      </h2>
+<h3 class="text-4xl sm:text-6xl md:text-7xl font-serif italic text-gold font-normal mb-8">
+        VARSHU
+      </h3>
+<!-- Grand Centerpiece Birthday Portrait -->
+<div class="relative w-full max-w-md my-6 p-3 glass-panel rounded-3xl border border-gold/50 shadow-[0_0_60px_rgba(223,190,118,0.3)] overflow-hidden">
+<div class="overflow-hidden rounded-2xl">
+<img alt="Varshu grand birthday celebration centerpiece portrait" class="w-full h-[500px] object-cover object-top animate-ken-burns" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvrB7Bkv7p7G-3-UMYZMRx7LDE7YlexXpFp_WlEzHwNJnANzSjCeoY56dUhuZbbXE0sEfd5nnqRvEaKF_vj0Hwg-dniQ3ehI8BRKkqK9SUCY0V99y46qQY8QNCkRVwN-7ibjdBCGhRh2IMniOMt0CGTbMoCnUXl97rz2cNLZzA51jFj9_THf_5tTxxW2lWj7J2f1d936Y8PmDVz4AYUFwa5o-b4yT6YdYsIaGE1PNQOfk037zVc7tJCBN9pQPe1zp4SYc" style="object-position: 50% 18%;">
+</div>
+<div class="py-4 px-2">
+<p class="font-serif text-lg text-stone-200 italic">
+            “Today isn't just your birthday. It's the day my favorite person was born.”
+          </p>
+</div>
+</div>
+<!-- Celebratory Floating Message -->
+<p class="max-w-xl text-stone-300 text-sm sm:text-base font-sans font-light leading-relaxed mt-4">
+        May this new year bring as much radiance, warmth, and boundless magic into your life as you effortlessly pour into mine every single day.
+      </p>
+</div>
+</section>
+<!-- END: Screen 09 — Grand Birthday Reveal -->
+<!-- BEGIN: Screen 10 — Final Love Letter & Closing -->
+<section class="relative min-h-screen flex flex-col items-center justify-center px-6 py-28 z-20" data-purpose="parchment-love-letter" id="screen-10">
+<div class="max-w-3xl w-full mx-auto">
+<!-- Luxury Parchment Sealed Letter -->
+<div class="relative bg-[#0d0a0d] border border-gold/30 rounded-3xl p-8 sm:p-14 shadow-[0_25px_70px_rgba(0,0,0,0.95)] backdrop-blur-xl">
+<!-- Wax Seal Embellishment -->
+<div class="absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full bg-gradient-to-br from-amber-700 via-rose-900 to-amber-900 border-2 border-gold flex items-center justify-center shadow-xl">
+<span class="font-cinzel text-xs font-bold text-gold-200 tracking-wider">A♥V</span>
+</div>
+<div class="pt-6 pb-4 border-b border-stone-800 flex justify-between items-center text-xs font-cinzel text-gold-400">
+<span class="">PRIVATE COMMUNIQUÉ</span>
+<span class="">SEPTEMBER 15, 2026</span>
+</div>
+<div class="py-10 space-y-6 text-stone-200 font-serif leading-relaxed text-lg sm:text-xl font-light">
+<p class="font-medium text-gold-300">My Dearest Varshu,</p>
+<p class="">Hi my dear sweetberry.Happy brithday its your day my darling.I lucky have a beautiful and good heart person in my life like you .I know working hard and stressing your self for your future.I believe that you will acheive and you can don't get tired because of this world i am always here from my darling..</p>
+<p class=""><span style="font-weight: 600; color: rgb(255, 255, 255); font-family: -apple-system-body, ui-sans-serif, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Helvetica, &quot;Apple Color Emoji&quot;, Arial, &quot;sans-serif&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; background-color: rgb(0, 0, 0);" class="">I remember the day we met. I was so excited to see you. When I saw you, I fell for you. It was a wonderful day in my life. I felt like you had released me from a jail. You are truly a wonderful woman</span><span style="color: rgb(255, 255, 255); font-family: -apple-system-body, ui-sans-serif, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Helvetica, &quot;Apple Color Emoji&quot;, Arial, &quot;sans-serif&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; background-color: rgb(0, 0, 0);" class="">❤️.I love you</span></p>
+<p class=""><p data-assistant-stream-block="" data-assistant-stream-block-index="0" style="overflow-wrap: break-word; text-wrap: pretty; margin-block: 0px 0.25rem; color: rgb(255, 255, 255); font-family: -apple-system-body, ui-sans-serif, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Helvetica, &quot;Apple Color Emoji&quot;, Arial, &quot;sans-serif&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; background-color: rgb(0, 0, 0);">There are many miracles going to happen in our lives. We are going to be together forever, and we are going to change our lives together. ❤️</p><p data-assistant-stream-block="" data-assistant-stream-block-index="1" style="overflow-wrap: break-word; text-wrap: pretty; margin-block: 1rem; color: rgb(255, 255, 255); font-family: -apple-system-body, ui-sans-serif, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Helvetica, &quot;Apple Color Emoji&quot;, Arial, &quot;sans-serif&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; background-color: rgb(0, 0, 0);">You get stressed because of other people’s words, but they only know how to find mistakes. Don’t let their words affect you. Just enjoy your life, always take care of your health, and don’t worry about anything.</p><p data-assistant-stream-block="" data-assistant-stream-block-index="2" style="overflow-wrap: break-word; text-wrap: pretty; margin-block: 1rem; color: rgb(255, 255, 255); font-family: -apple-system-body, ui-sans-serif, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Helvetica, &quot;Apple Color Emoji&quot;, Arial, &quot;sans-serif&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; background-color: rgb(0, 0, 0);">Remember, your boyfriend is always there for you, no matter what. ❤️</p><p data-assistant-stream-block="" data-assistant-stream-block-index="3" style="overflow-wrap: break-word; text-wrap: pretty; margin-block: 1rem 0.25rem; color: rgb(255, 255, 255); font-family: -apple-system-body, ui-sans-serif, -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Helvetica, &quot;Apple Color Emoji&quot;, Arial, &quot;sans-serif&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; background-color: rgb(0, 0, 0);"><span style="font-weight: 600;">Muaaaawwww! 😘❤️</span></p></p>
+<div class="pt-6 text-right">
+<p class="font-sans text-xs uppercase tracking-widest text-stone-400 mb-1">Forever yours,</p>
+<p class="font-script text-4xl sm:text-5xl text-gold">Akash ❤️</p>
+</div>
+</div>
+<div class="pt-4 border-t border-stone-900 text-center">
+<span class="text-[11px] font-sans text-stone-500 uppercase tracking-[0.3em]">
+            Sealed with timeless devotion
+          </span>
+</div>
+</div>
+<!-- Silent Final Signoff -->
+<div class="text-center mt-20 pb-20">
+<p class="text-xs font-cinzel tracking-[0.4em] uppercase text-stone-500">
+          Made with love. Just for you.
+        </p>
+<div class="w-2 h-2 rounded-full bg-gold/40 mx-auto mt-4"></div>
+</div>
+</div>
+</section>
+<!-- END: Screen 10 — Final Love Letter & Closing -->
+<!-- BEGIN: Bottom Floating Timeline Navigation -->
+<nav class="fixed bottom-4 inset-x-0 z-50 flex justify-center px-4 pointer-events-none" data-purpose="floating-timeline-bar">
+<div class="glass-panel px-4 py-2.5 rounded-full flex items-center gap-3 sm:gap-6 shadow-2xl border border-gold/30 pointer-events-auto overflow-x-auto max-w-full">
+<a class="text-[10px] sm:text-xs font-cinzel tracking-widest text-stone-400 hover:text-gold transition duration-200 whitespace-nowrap" href="#screen-01">01 INTRO</a>
+<span class="text-stone-700 text-xs">•</span>
+<a class="text-[10px] sm:text-xs font-cinzel tracking-widest text-stone-400 hover:text-gold transition duration-200 whitespace-nowrap" href="#screen-03">02 HER</a>
+<span class="text-stone-700 text-xs">•</span>
+<a class="text-[10px] sm:text-xs font-cinzel tracking-widest text-stone-400 hover:text-gold transition duration-200 whitespace-nowrap" href="#screen-04">03 STORY</a>
+<span class="text-stone-700 text-xs">•</span>
+<a class="text-[10px] sm:text-xs font-cinzel tracking-widest text-stone-400 hover:text-gold transition duration-200 whitespace-nowrap" href="#screen-05">04 MEMORIES</a>
+<span class="text-stone-700 text-xs">•</span>
+<a class="text-[10px] sm:text-xs font-cinzel tracking-widest text-stone-400 hover:text-gold transition duration-200 whitespace-nowrap" href="#screen-07">05 HEART</a>
+<span class="text-stone-700 text-xs">•</span>
+<a class="text-[10px] sm:text-xs font-cinzel tracking-widest text-stone-400 hover:text-gold transition duration-200 whitespace-nowrap" href="#screen-09">06 BIRTHDAY</a>
+<span class="text-stone-700 text-xs">•</span>
+<a class="text-[10px] sm:text-xs font-cinzel tracking-widest text-stone-400 hover:text-gold transition duration-200 whitespace-nowrap" href="#screen-10">07 LETTER</a>
+</div>
+</nav>
+<!-- END: Bottom Floating Timeline Navigation -->
+<!-- BEGIN: Interactive Logic Scripts -->
+<!-- Script 0: WebGL Procedural Shader Background -->
+<script data-purpose="webgl-celestial-shader">
+(function() {
+  const canvas = document.getElementById('shaderCanvas');
+  if (!canvas) return;
+
+  function syncSize() {
+    const w = window.innerWidth || 1280;
+    const h = window.innerHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+    }
+  }
+  window.addEventListener('resize', syncSize);
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+uniform float u_time;
+uniform vec2 u_resolution;
+varying vec2 v_texCoord;
+
+vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
+vec3 permute(vec3 x) { return mod289(((x*34.0)+1.0)*x); }
+
+float snoise(vec2 v) {
+    const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+    vec2 i  = floor(v + dot(v, C.yy));
+    vec2 x0 = v -   i + dot(i, C.xx);
+    vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+    vec4 x12 = x0.xyxy + C.xxzz;
+    x12.xy -= i1;
+    i = mod289(i);
+    vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
+    vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
+    m = m*m;
+    m = m*m;
+    vec3 x = 2.0 * fract(p * C.www) - 1.0;
+    vec3 h = abs(x) - 0.5;
+    vec3 ox = floor(x + 0.5);
+    vec3 a0 = x - ox;
+    m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+    vec3 g;
+    g.x  = a0.x  * x0.x  + h.x  * x0.y;
+    g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+    return 130.0 * dot(m, g);
+}
+
+void main() {
+    vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / min(u_resolution.x, u_resolution.y);
+    float t = u_time * 0.15;
+    
+    float n1 = snoise(uv * 1.5 + vec2(cos(t * 0.5), sin(t * 0.4)) * 0.8);
+    float n2 = snoise(uv * 2.8 - vec2(sin(t * 0.3), cos(t * 0.6)) * 1.1 + n1 * 0.5);
+    float ribbon = smoothstep(-0.2, 0.9, n1 * 0.5 + n2 * 0.35);
+
+    vec3 colDeepWine = vec3(0.22, 0.05, 0.12);
+    vec3 colChampagne = vec3(0.87, 0.73, 0.45);
+    vec3 colIvory = vec3(0.98, 0.92, 0.82);
+    vec3 colBase = vec3(0.03, 0.02, 0.05);
+
+    vec3 col = colBase;
+    col += colDeepWine * ribbon * 0.75;
+    col += colChampagne * pow(ribbon, 2.5) * 0.55;
+    col += colIvory * pow(ribbon, 4.0) * 0.3;
+
+    float vignette = 1.0 - smoothstep(0.5, 1.4, length(uv * 1.1));
+    col *= vignette;
+
+    gl_FragColor = vec4(col, 0.85);
+}`;
+
+  function compile(type, source) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, source);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+
+  function render(t) {
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+<!-- Script 1: Canvas Starfield Setup -->
+<script data-purpose="starfield-canvas">
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const numStars = 140;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Star {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 1.5 + 0.3;
+        this.speed = Math.random() * 0.15 + 0.05;
+        this.alpha = Math.random() * 0.8 + 0.2;
+        this.delta = Math.random() * 0.02 * (Math.random() > 0.5 ? 1 : -1);
+      }
+      update() {
+        this.y -= this.speed;
+        if (this.y < 0) this.y = canvas.height;
+        this.alpha += this.delta;
+        if (this.alpha <= 0.1 || this.alpha >= 0.9) this.delta = -this.delta;
+      }
+      draw() {
+        ctx.fillStyle = `rgba(245, 228, 178, ${Math.max(0, this.alpha)})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < numStars; i++) {
+      stars.push(new Star());
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(star => {
+        star.update();
+        star.draw();
+      });
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+  </script>
+<!-- Script 2: Audio Toggle Simulated State -->
+<script data-purpose="audio-controller">
+    const audioToggle = document.getElementById('audioToggle');
+    const audioLabel = document.getElementById('audioLabel');
+    const audioWaves = document.getElementById('audioWaves');
+    let isPlaying = true;
+
+    audioToggle.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        audioLabel.textContent = 'Celestial Soundtrack • Playing';
+        audioWaves.style.opacity = '1';
+      } else {
+        audioLabel.textContent = 'Celestial Soundtrack • Paused';
+        audioWaves.style.opacity = '0.3';
+      }
+    });
+  </script>
+<!-- Script 3: Memory Cards Cycling with Real Photos -->
+<script data-purpose="memory-cards-logic">
+    const memoryData = [
+      {
+        counter: "MEMORY 01 / 06",
+        date: "GOLDEN HOUR",
+        emoji: "✨",
+        title: "The Sunset Silhouette",
+        snippet: "Looking out into the glowing water at dusk, feeling the quiet certainty that you would become my favorite story.",
+        img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDV3Qd4Ry9CTjFQW-0QbhapLAc7T8bTqSfq4mOJWfGyb9petixVnpUTgAQN1uGOHAdplDlWRCzdMFLZSawdVQPTjplkM7dtqk3TzmfA_UJIbL0s1lnbb_bRrhaB3s-PUdNAhX_38L1qCB1UYWWqYFQ0bouWmiy9vdjds_1I2-TAtCJSaCUc_KHO0oYI2jdn-_6bcGockGvlWrZqJsAZw9PbXDv6vcJsQqOvVSN5_hw_t1NxiCVOr3cKnqVH_vGwSXf_3Zw"
+      },
+      {
+        counter: "MEMORY 02 / 06",
+        date: "COASTAL HORIZONS",
+        emoji: "🌊",
+        title: "Sunset by the Shore",
+        snippet: "Walking together where the pink skies reflect like glass against the wet sand and crashing waves.",
+        img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAWnWFjWrPWMi1UToC1vpG7BWFziyfSy6-RYbm3h0hKL-Yt_TDJQqvxTf-mRJ_vly4Ih5wBp8aq2OUecHRgylF-GK9NoDVusQvjCgan1XtQfeFNqBq_YgexRCmWYZcgXbxnEv7QUA2VvcvCqXLMl4H4r8UPDjHWzMC26Ki3yOxD1yHzt3m-3iPpOYnCAUsj0QfsdkHkRwpn24JjUaI3_2cfGils7JoM2lfRyDuEFJlKn_JsXvULEnby7MtfmNiphE75cPw"
+      },
+      {
+        counter: "MEMORY 03 / 06",
+        date: "AFTERNOON SUN",
+        emoji: "☀️",
+        title: "Sunlit Beach Smile",
+        snippet: "That relaxed, gorgeous laughter on the beach that instantly turns any normal day into pure warmth.",
+        img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBDfjFHdPhGy3gzNe8n933cxbD7UoJ6q11gNXDrKWRdJbK1TA9H3WcmUeHnNw_1GyXyZa0n-tgQyb51FzfsikLnkYt3ZL-kruexoWwBeFcjLson4gjjYIM8LEHo7JLRAozyt5HEr7YyilZVdJSGSUQNJszAyb8vtL4EMjI1pODupbeG31tKm4a_6Q14zvgLw9hdEWrh2THdegg8PqlAn_ULe4IHPYKD48V6uvaokq9TKtTBMRAB81rVAe1ts7O5gqlJO8w"
+      },
+      {
+        counter: "MEMORY 04 / 06",
+        date: "TENDER BREEZE",
+        emoji: "🐚",
+        title: "Hands in the Breeze",
+        snippet: "Feeling the wind across the shore, looking up at the sky in complete peace and contentment.",
+        img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAMzAZDNH_fpUuQHjXcvwrdDEedjA82j70JgYa541T1Ro2vAU7T3GgWPEkXvB6gnFmpsLt4HbBW84YFN4b61I6mXWpDEQO3vqEmak6nYWMOYi6RYM3uMHFDl7rrFhvyyqLWQ5zkX4U62Y5mFDl73Tu7jszUPWPFnnXUBm2zwKoHLYuKB3RqtkrD2KOYxQcnXeMx8V9uNkVkw_NdpCYTTE81V9Q7xbyDy4-lF0cWiiC97PiG5iWYR6DaLzCmJOpBmPaJqXI"
+      },
+      {
+        counter: "MEMORY 05 / 06",
+        date: "NEON NIGHTS",
+        emoji: "💫",
+        title: "Neon Glow & Starlight Eyes",
+        snippet: "Surrounded by vibrant colors and playful energy, outshining every single light in the room.",
+        img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCH1Xnir4Yni_SBcjhI55SfcrzbPRR3r5AqPdfs6Ag1HuxsMljUxfRlEhgPmwzVw5XmRgzI4uVzYvFoENaGe0iZtbecygMaPvwcSYfMB45dYmtstM4JF4TbtHd1nT6sSwWim5LyIWY5Ow09kZfhl3daWlzyS1gbVEsKeO2ecGrA4tA3PUOpGiibq5sfkCBG4UD2z1FwtGNkvLxCSuVIPCXMlmWK5xSM3FWVGDPA6GfuA_tIJjkgs9aBHVZMTIPwut2uXVU"
+      },
+      {
+        counter: "MEMORY 06 / 06",
+        date: "COZY MOMENTS",
+        emoji: "☕",
+        title: "Candid Cafe Days",
+        snippet: "Quiet sips, shared dessert, and the quiet comfort of being in your warm company.",
+        img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCcTebLZPx_dj-bBelHV6dxAzwAHpBk3seTohCra52aynbOymPL35qPWUzN4kiFu4b9tT5bCHl1VpkxGRL7K3GMbKZ6wIBjsLZU80B-k_sfKGwQlBDGWPTB3zJq_4GjfxNhwQYkrHQXAJLSHJkb8vZ_6SjDz_-hGoxTMF7MQridQK-RKXm4H-ZU26OQHPZBUT2IzsedowhpQ31x06z4-rwrFeGpgj-AAWVo_o9SvtO-_rvaNDbTcxs35FSyCM8tXRAlPfA"
+      }
+    ];
+
+    let currentCardIndex = 0;
+    const cardStackContainer = document.getElementById('cardStackContainer');
+    const memoryCard = document.getElementById('memoryCard');
+    const cardCounter = document.getElementById('cardCounter');
+    const cardDate = document.getElementById('cardDate');
+    const cardEmoji = document.getElementById('cardEmoji');
+    const cardTitle = document.getElementById('cardTitle');
+    const cardSnippet = document.getElementById('cardSnippet');
+    const cardImage = document.getElementById('cardImage');
+
+    cardStackContainer.addEventListener('click', () => {
+      memoryCard.style.transform = 'scale(0.95) translateY(10px)';
+      memoryCard.style.opacity = '0.6';
+
+      setTimeout(() => {
+        currentCardIndex = (currentCardIndex + 1) % memoryData.length;
+        const item = memoryData[currentCardIndex];
+        cardCounter.textContent = item.counter;
+        cardDate.textContent = item.date;
+        cardEmoji.textContent = item.emoji;
+        cardTitle.textContent = item.title;
+        cardSnippet.textContent = item.snippet;
+        cardImage.src = item.img;
+
+        memoryCard.style.transform = 'scale(1) translateY(0)';
+        memoryCard.style.opacity = '1';
+      }, 200);
+    });
+  </script>
+<!-- Script 4: Celestial Heart Reasons Clicker -->
+<script data-purpose="reasons-heart-logic">
+    const reasons = [
+      "Your smile outshines every star in this sky, and turns even my hardest days into warmth.",
+      "The gentle and unselfish way you care for everyone around you without asking for anything back.",
+      "The quiet little moments when it’s just the two of us, and the whole world finally disappears.",
+      "Your infectious sense of wonder and the quiet intelligence you carry with such grace.",
+      "The way you believe in me even before I have figured out how to believe in myself.",
+      "Because finding you felt like the first time the universe made absolute, unmistakable sense."
+    ];
+
+    let currentReasonIndex = 0;
+    const heartBtn = document.getElementById('heartBtn');
+    const reasonContainer = document.getElementById('reasonContainer');
+    const reasonIndex = document.getElementById('reasonIndex');
+    const reasonText = document.getElementById('reasonText');
+
+    heartBtn.addEventListener('click', () => {
+      reasonContainer.style.opacity = '0.3';
+      reasonContainer.style.transform = 'scale(0.98)';
+
+      setTimeout(() => {
+        currentReasonIndex = (currentReasonIndex + 1) % reasons.length;
+        const formattedIndex = String(currentReasonIndex + 1).padStart(2, '0');
+        reasonIndex.textContent = `REASON ${formattedIndex}`;
+        reasonText.textContent = `“${reasons[currentReasonIndex]}”`;
+
+        reasonContainer.style.opacity = '1';
+        reasonContainer.style.transform = 'scale(1)';
+      }, 250);
+    });
+  </script>
+<!-- Script 5: Real-time Countdown to September 15, 2026 -->
+<script data-purpose="countdown-clock">
+    const targetDate = new Date('September 15, 2026 00:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById('days').innerText = '00';
+        document.getElementById('hours').innerText = '00';
+        document.getElementById('minutes').innerText = '00';
+        document.getElementById('seconds').innerText = '00';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').innerText = String(days).padStart(2, '0');
+      document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+<!-- END: Interactive Logic Scripts -->
+
+
+
+
+</body></html>
