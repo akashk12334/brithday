@@ -200,14 +200,15 @@
 </div>
 </div>
 <!-- Audio Player Pill Interactive -->
+<audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
 <div class="glass-panel px-4 py-1.5 rounded-full flex items-center gap-3 cursor-pointer shadow-lg shadow-black/40 hover:border-gold/50 transition duration-300" data-purpose="audio-toggle" id="audioToggle">
-<div class="flex items-center gap-1 h-3" id="audioWaves">
+<div class="flex items-center gap-1 h-3 opacity-60" id="audioWaves">
 <span class="w-0.5 h-2 bg-gold-400 animate-pulse"></span>
 <span class="w-0.5 h-3.5 bg-gold-300 animate-pulse delay-75"></span>
 <span class="w-0.5 h-1.5 bg-gold-500 animate-pulse delay-150"></span>
 <span class="w-0.5 h-3 bg-gold-400 animate-pulse delay-100"></span>
 </div>
-<span class="text-[11px] font-sans tracking-widest uppercase text-stone-300" id="audioLabel">Celestial Soundtrack • Playing</span>
+<span class="text-[11px] font-sans tracking-widest uppercase text-stone-300" id="audioLabel">Celestial Soundtrack • Tap to Play 🎵</span>
 </div>
 </header>
 <!-- END: Ambient Audio Status & Top Bar -->
@@ -796,24 +797,301 @@ void main() {
     }
     animateStars();
   </script>
-<!-- Script 2: Audio Toggle Simulated State -->
+<!-- Script 2: Celestial Audio Engine & Soundtrack -->
 <script data-purpose="audio-controller">
-    const audioToggle = document.getElementById('audioToggle');
+class CelestialSoundSystem {
+  constructor() {
+    this.audioCtx = null;
+    this.masterGain = null;
+    this.padGain = null;
+    this.filter = null;
+    this.isPlaying = false;
+    this.chordIndex = 0;
+    this.activeVoices = [];
+    this.chimeTimer = null;
+    this.chordTimer = null;
+
+    // Romantic Cosmic Chords (Eb Maj9, Cm9, Ab Maj7, Bb Add9)
+    this.chords = [
+      [155.56, 196.00, 233.08, 293.66, 349.23], // Eb Maj9
+      [130.81, 196.00, 233.08, 311.13, 392.00], // C min9
+      [103.83, 155.56, 196.00, 261.63, 311.13], // Ab Maj7
+      [116.54, 174.61, 233.08, 293.66, 349.23]  // Bb sus4 / 9
+    ];
+    this.pentatonicChimes = [523.25, 587.33, 659.25, 783.99, 880.00, 1046.50, 1174.66, 1318.51];
+  }
+
+  init() {
+    if (this.audioCtx) return;
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    this.audioCtx = new AudioContextClass();
+
+    this.masterGain = this.audioCtx.createGain();
+    this.masterGain.gain.setValueAtTime(0.7, this.audioCtx.currentTime);
+    this.masterGain.connect(this.audioCtx.destination);
+
+    // Warm Lowpass Filter for Dreamy Space Ambience
+    this.filter = this.audioCtx.createBiquadFilter();
+    this.filter.type = 'lowpass';
+    this.filter.frequency.setValueAtTime(650, this.audioCtx.currentTime);
+    this.filter.Q.setValueAtTime(1.5, this.audioCtx.currentTime);
+    this.filter.connect(this.masterGain);
+
+    this.padGain = this.audioCtx.createGain();
+    this.padGain.gain.setValueAtTime(0, this.audioCtx.currentTime);
+    this.padGain.connect(this.filter);
+  }
+
+  start() {
+    this.init();
+    if (this.audioCtx.state === 'suspended') {
+      this.audioCtx.resume();
+    }
+
+    // Check if user provided custom music.mp3
+    const bgMusic = document.getElementById('bgMusic');
+    if (bgMusic && bgMusic.readyState >= 2 && !bgMusic.error) {
+      bgMusic.play().then(() => {
+        this.isPlaying = true;
+        this.updateUI(true);
+      }).catch(() => {
+        this.startGenerativePad();
+      });
+      return;
+    }
+
+    this.startGenerativePad();
+  }
+
+  startGenerativePad() {
+    this.isPlaying = true;
+    this.updateUI(true);
+
+    const now = this.audioCtx.currentTime;
+    this.padGain.gain.cancelScheduledValues(now);
+    this.padGain.gain.setValueAtTime(this.padGain.gain.value, now);
+    this.padGain.gain.linearRampToValueAtTime(0.22, now + 3.0);
+
+    this.playNextChord();
+    if (this.chordTimer) clearInterval(this.chordTimer);
+    this.chordTimer = setInterval(() => this.playNextChord(), 9000);
+
+    this.scheduleNextChime();
+  }
+
+  playNextChord() {
+    if (!this.isPlaying || !this.audioCtx) return;
+    const now = this.audioCtx.currentTime;
+    const freqs = this.chords[this.chordIndex];
+    this.chordIndex = (this.chordIndex + 1) % this.chords.length;
+
+    // Fade out previous voices
+    const oldVoices = [...this.activeVoices];
+    this.activeVoices = [];
+    oldVoices.forEach(({ osc, gain }) => {
+      gain.gain.cancelScheduledValues(now);
+      gain.gain.setValueAtTime(gain.gain.value, now);
+      gain.gain.linearRampToValueAtTime(0.0001, now + 2.5);
+      setTimeout(() => {
+        try { osc.stop(); osc.disconnect(); } catch (e) {}
+      }, 2600);
+    });
+
+    // Spawn new chord voices with warm detune
+    freqs.forEach((freq, idx) => {
+      const osc = this.audioCtx.createOscillator();
+      const voiceGain = this.audioCtx.createGain();
+
+      osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+      osc.frequency.setValueAtTime(freq, now);
+      osc.detune.setValueAtTime((Math.random() - 0.5) * 6, now);
+
+      voiceGain.gain.setValueAtTime(0.0001, now);
+      voiceGain.gain.linearRampToValueAtTime(0.05, now + 2.0);
+
+      osc.connect(voiceGain);
+      voiceGain.connect(this.padGain);
+      osc.start(now);
+
+      this.activeVoices.push({ osc, gain: voiceGain });
+    });
+  }
+
+  scheduleNextChime() {
+    if (!this.isPlaying) return;
+    const delay = 2500 + Math.random() * 4000;
+    this.chimeTimer = setTimeout(() => {
+      if (this.isPlaying) {
+        const note = this.pentatonicChimes[Math.floor(Math.random() * this.pentatonicChimes.length)];
+        this.playChime(note, 0.03, 3.0);
+        this.scheduleNextChime();
+      }
+    }, delay);
+  }
+
+  stop() {
+    this.isPlaying = false;
+    this.updateUI(false);
+
+    const bgMusic = document.getElementById('bgMusic');
+    if (bgMusic && !bgMusic.paused) {
+      bgMusic.pause();
+    }
+
+    if (this.audioCtx) {
+      const now = this.audioCtx.currentTime;
+      this.padGain.gain.cancelScheduledValues(now);
+      this.padGain.gain.setValueAtTime(this.padGain.gain.value, now);
+      this.padGain.gain.linearRampToValueAtTime(0.0001, now + 1.5);
+    }
+    if (this.chimeTimer) clearTimeout(this.chimeTimer);
+    if (this.chordTimer) clearInterval(this.chordTimer);
+  }
+
+  toggle() {
+    if (this.isPlaying) {
+      this.stop();
+    } else {
+      this.start();
+    }
+  }
+
+  updateUI(playing) {
     const audioLabel = document.getElementById('audioLabel');
     const audioWaves = document.getElementById('audioWaves');
-    let isPlaying = true;
+    if (audioLabel) {
+      audioLabel.textContent = playing ? 'Celestial Soundtrack • Playing 🎵' : 'Celestial Soundtrack • Paused';
+    }
+    if (audioWaves) {
+      audioWaves.style.opacity = playing ? '1' : '0.3';
+    }
+  }
 
-    audioToggle.addEventListener('click', () => {
-      isPlaying = !isPlaying;
-      if (isPlaying) {
-        audioLabel.textContent = 'Celestial Soundtrack • Playing';
-        audioWaves.style.opacity = '1';
-      } else {
-        audioLabel.textContent = 'Celestial Soundtrack • Paused';
-        audioWaves.style.opacity = '0.3';
-      }
+  // --- INTERACTIVE SOUND EFFECTS (SFX) ---
+  playChime(freq = 880, vol = 0.08, decay = 2.0) {
+    this.init();
+    if (this.audioCtx.state === 'suspended') this.audioCtx.resume();
+    const now = this.audioCtx.currentTime;
+
+    const osc = this.audioCtx.createOscillator();
+    const gain = this.audioCtx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, now);
+
+    gain.gain.setValueAtTime(vol, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + decay);
+
+    osc.connect(gain);
+    gain.connect(this.masterGain);
+
+    osc.start(now);
+    osc.stop(now + decay);
+  }
+
+  playHeartbeat() {
+    this.init();
+    if (this.audioCtx.state === 'suspended') this.audioCtx.resume();
+    const now = this.audioCtx.currentTime;
+
+    const thump = (time, freq, duration, vol) => {
+      const osc = this.audioCtx.createOscillator();
+      const gain = this.audioCtx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, time);
+      osc.frequency.exponentialRampToValueAtTime(32, time + duration);
+
+      gain.gain.setValueAtTime(vol, time);
+      gain.gain.exponentialRampToValueAtTime(0.001, time + duration);
+
+      osc.connect(gain);
+      gain.connect(this.masterGain);
+
+      osc.start(time);
+      osc.stop(time + duration);
+    };
+
+    thump(now, 68, 0.16, 0.45);
+    thump(now + 0.22, 60, 0.18, 0.35);
+
+    setTimeout(() => {
+      this.playChime(1046.50, 0.06, 2.2);
+    }, 180);
+  }
+
+  playCardFlip() {
+    const notes = [659.25, 783.99, 1046.50];
+    notes.forEach((note, i) => {
+      setTimeout(() => {
+        this.playChime(note, 0.045, 1.2);
+      }, i * 65);
     });
-  </script>
+  }
+
+  playBirthdayFanfare() {
+    const fanfareNotes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50];
+    fanfareNotes.forEach((n, i) => {
+      setTimeout(() => {
+        this.playChime(n, 0.06, 2.8);
+      }, i * 110);
+    });
+  }
+
+  playWhoosh() {
+    this.init();
+    if (this.audioCtx.state === 'suspended') this.audioCtx.resume();
+    const now = this.audioCtx.currentTime;
+    const osc = this.audioCtx.createOscillator();
+    const gain = this.audioCtx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(220, now);
+    osc.frequency.exponentialRampToValueAtTime(880, now + 0.6);
+
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.linearRampToValueAtTime(0.08, now + 0.25);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.7);
+
+    osc.connect(gain);
+    gain.connect(this.masterGain);
+
+    osc.start(now);
+    osc.stop(now + 0.75);
+  }
+}
+
+const soundSystem = new CelestialSoundSystem();
+window.soundSystem = soundSystem;
+
+const audioToggle = document.getElementById('audioToggle');
+if (audioToggle) {
+  audioToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    soundSystem.toggle();
+  });
+}
+
+// Auto-start music on first interaction
+const startOnFirstGesture = () => {
+  if (!soundSystem.isPlaying) {
+    soundSystem.start();
+  }
+  window.removeEventListener('click', startOnFirstGesture);
+  window.removeEventListener('touchstart', startOnFirstGesture);
+};
+window.addEventListener('click', startOnFirstGesture, { once: true });
+window.addEventListener('touchstart', startOnFirstGesture, { once: true });
+
+// "Enter Your Story" Button Hook
+const enterStoryBtn = document.querySelector('[data-purpose="enter-story-btn"]');
+if (enterStoryBtn) {
+  enterStoryBtn.addEventListener('click', () => {
+    soundSystem.playWhoosh();
+    if (!soundSystem.isPlaying) soundSystem.start();
+  });
+}
+</script>
 <!-- Script 3: Memory Cards Cycling with Real Photos -->
 <script data-purpose="memory-cards-logic">
     const memoryData = [
@@ -878,6 +1156,7 @@ void main() {
     const cardImage = document.getElementById('cardImage');
 
     cardStackContainer.addEventListener('click', () => {
+      if (window.soundSystem) window.soundSystem.playCardFlip();
       memoryCard.style.transform = 'scale(0.95) translateY(10px)';
       memoryCard.style.opacity = '0.6';
 
@@ -914,6 +1193,7 @@ void main() {
     const reasonText = document.getElementById('reasonText');
 
     heartBtn.addEventListener('click', () => {
+      if (window.soundSystem) window.soundSystem.playHeartbeat();
       reasonContainer.style.opacity = '0.3';
       reasonContainer.style.transform = 'scale(0.98)';
 
@@ -927,6 +1207,21 @@ void main() {
         reasonContainer.style.transform = 'scale(1)';
       }, 250);
     });
+
+    // Observe Birthday Section for Fanfare
+    const bdaySection = document.getElementById('screen-09');
+    if (bdaySection && 'IntersectionObserver' in window) {
+      let fanfarePlayed = false;
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !fanfarePlayed) {
+            fanfarePlayed = true;
+            if (window.soundSystem) window.soundSystem.playBirthdayFanfare();
+          }
+        });
+      }, { threshold: 0.35 });
+      obs.observe(bdaySection);
+    }
   </script>
 <!-- Script 5: Real-time Countdown to September 15, 2026 -->
 <script data-purpose="countdown-clock">
